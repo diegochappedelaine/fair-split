@@ -42,6 +42,10 @@ const generateDefaultState = () =>
       { name: "Entertainment", amount: 200 },
     ],
   } satisfies Partial<FairSplitStore>);
+const generateEmptyState = () => ({
+  persons: [{ name: "", earning: 0 }],
+  expenses: [{ name: "", amount: 0 }],
+});
 
 const getTotalEarning = (persons: Person[]) => {
   return persons.reduce((total, person) => total + person.earning, 0);
@@ -51,6 +55,7 @@ export const useFairSplitStore = create(
   persist<FairSplitStore>(
     (set, get) => ({
       ...generateDefaultState(),
+
       totalEarning: () => getTotalEarning(get().persons),
 
       addPerson: () =>
@@ -87,7 +92,7 @@ export const useFairSplitStore = create(
           expenses: state.expenses.filter((_, i) => i !== index),
         })),
 
-      resetStore: () => set(generateDefaultState()),
+      resetStore: () => set(generateEmptyState()),
     }),
     {
       name: "fair-split-storage",

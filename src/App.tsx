@@ -36,7 +36,7 @@ const calculateSharePerExpense = (
   return ((expenseAmount / totalEarning) * personEarning).toFixed(2);
 };
 
-export default function Component() {
+export default function App() {
   const {
     persons,
     expenses,
